@@ -3,13 +3,26 @@
 **US-এর মোস্ট ট্রেন্ডিং + মোস্ট সার্চেবল টপিক — ক্যাটাগরি ও প্ল্যাটফর্ম অনুযায়ী, রোজ দুপুর ১টায় তোমার Google Sheet-এ।**
 ১০০% ফ্রি · কোনো ক্রেডিট কার্ড নয় · কোনো ট্রায়াল নয় · সব ওপেন/পাবলিক API।
 
-> 🔍 আগের ভার্সনের **১৪টি টেকনিক্যাল বাগ** খুঁজে ফিক্স করা হয়েছে — বিস্তারিত **[AUDIT.md](AUDIT.md)**-এ।
+> 🔍 দুই দফা অডিটে **১৮টি টেকনিক্যাল বাগ** খুঁজে ফিক্স করা হয়েছে (২টি crash-level) — **[AUDIT.md](AUDIT.md)**
+> 🚀 সেটআপ শুরু করো এখান থেকে → **[SETUP.md](SETUP.md)**  ·  ২৭টি টেস্ট পাস ✅
 
 ---
 
 ## 📊 আউটপুট
 
-**৮টি ট্যাব:** `DASHBOARD` · Tech · Health · News · Islamic · Image_Emoji · Business · `ARCHIVE`
+**৯টি ট্যাব:** `DASHBOARD` · `CONTENT_PLAN` · Tech · Health · News · Islamic · Image_Emoji · Business · `ARCHIVE`
+
+### ✍️ CONTENT_PLAN — আসল কাজের পাতা
+রোজ **১৫টি সেরা টপিকের সম্পূর্ণ ব্রিফ**, Opportunity অনুযায়ী সাজানো:
+
+| Opportunity | Topic | Best Title | Outline | FAQ | 🎬 Hook | 🎬 Script | Hashtags | Status |
+|---|---|---|---|---|---|---|---|---|
+| **74.4** | iOS 27.1 release date | iOS 27.1 Release Date: When to Expect It | ৬টি H2 | ৪টি প্রশ্ন | scroll-stopper লাইন | ৫টি beat, <৪৫ সে. | ৬টি ট্যাগ | To Do ▾ |
+
+```
+Opportunity = (Demand × 0.65) + ((100 − Competition) × 0.35)
+```
+ডিমান্ড বেশি **আর** কম্পিটিশন কম — এমন টপিকই উপরে ওঠে। নতুন সাইট/চ্যানেলের জন্য এটাই সঠিক অগ্রাধিকার।
 
 প্রতি ক্যাটাগরি ট্যাবে **৬ প্ল্যাটফর্ম × ৫ টপিক = ৩০ সারি**:
 
