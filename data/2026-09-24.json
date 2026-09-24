@@ -1,0 +1,478 @@
+{
+ "generated": "2026-09-25 01:01",
+ "tz": "Asia/Kolkata",
+ "categories": {
+  "Tech": [
+   {
+    "platform": "Google Trends",
+    "rank": 1,
+    "topic": "best laptop 2026 for personal use",
+    "score": 45.5,
+    "link": "https://www.google.com/search?q=best%20laptop%202026%20for%20personal%20use",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Google Trends",
+    "rank": 2,
+    "topic": "best laptop 2026 for college students",
+    "score": 45.5,
+    "link": "https://www.google.com/search?q=best%20laptop%202026%20for%20college%20students",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Google Trends",
+    "rank": 3,
+    "topic": "best laptop 2026 with touch screen",
+    "score": 45.5,
+    "link": "https://www.google.com/search?q=best%20laptop%202026%20with%20touch%20screen",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Google Trends",
+    "rank": 4,
+    "topic": "best laptop 2026 for gaming",
+    "score": 42.5,
+    "link": "https://www.google.com/search?q=best%20laptop%202026%20for%20gaming",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Google Trends",
+    "rank": 5,
+    "topic": "best laptop 2026 for work",
+    "score": 42.5,
+    "link": "https://www.google.com/search?q=best%20laptop%202026%20for%20work",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "YouTube",
+    "rank": 1,
+    "topic": "tech review 2026",
+    "score": 37.5,
+    "link": "https://www.youtube.com/results?search_query=tech%20review%202026",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "YouTube",
+    "rank": 2,
+    "topic": "kwid e tech 2026 review",
+    "score": 37.5,
+    "link": "https://www.youtube.com/results?search_query=kwid%20e%20tech%202026%20review",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "YouTube",
+    "rank": 3,
+    "topic": "new smartphone unboxing",
+    "score": 37.5,
+    "link": "https://www.youtube.com/results?search_query=new%20smartphone%20unboxing",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "YouTube",
+    "rank": 4,
+    "topic": "ai tools tutorial for beginners in hindi",
+    "score": 33.5,
+    "link": "https://www.youtube.com/results?search_query=ai%20tools%20tutorial%20for%20beginners%20in%20hindi",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "YouTube",
+    "rank": 5,
+    "topic": "ai news this week",
+    "score": 30.5,
+    "link": "https://www.youtube.com/results?search_query=ai%20news%20this%20week",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Reddit",
+    "rank": 1,
+    "topic": "Qwen-3.8-27B is good enough that I stopped using API",
+    "score": 51.5,
+    "link": "https://www.reddit.com/r/LocalLLaMA/comments/1wp0z3i/qwen3827b_is_good_enough_that_i_stopped_using_api/",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Reddit",
+    "rank": 2,
+    "topic": "Anthropic CEO Dario Amodei: AI Biology Will Go From Weak To Superhuman Within A Few Years",
+    "score": 51.0,
+    "link": "https://www.reddit.com/r/singularity/comments/1wog3z8/anthropic_ceo_dario_amodei_ai_biology_will_go/",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Reddit",
+    "rank": 3,
+    "topic": "The moment Claude agents discover a new molecular mechanism, talking as if they were human, using interjections and cues",
+    "score": 50.0,
+    "link": "https://www.reddit.com/r/singularity/comments/1wognfz/the_moment_claude_agents_discover_a_new_molecular/",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Reddit",
+    "rank": 4,
+    "topic": "My foray into local ai. Two BC-250 ex mining apus running Qwen3.6-35B-A3B Q4_K_M at 60 tok/s with 64k context",
+    "score": 38.5,
+    "link": "https://www.reddit.com/r/LocalLLaMA/comments/1wou3gr/my_foray_into_local_ai_two_bc250_ex_mining_apus/",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Reddit",
+    "rank": 5,
+    "topic": "China ranks #1 for AI optimism in new poll while the US ranks amongst bottom 5 countries in pessimism",
+    "score": 25.5,
+    "link": "https://www.reddit.com/r/singularity/comments/1wp1itv/china_ranks_1_for_ai_optimism_in_new_poll_while/",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Quora",
+    "rank": 1,
+    "topic": "How do I choose the right AI tools for my work?",
+    "score": 52.5,
+    "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9rUlNTcDRiQWdSNzZpWnpjOFF5Z0FuZk5NRnZHakNXcy10NHpFMjE1Yk53Z2pMTnBkeC03VHNRX3pTRzJGY2tSbWpHMUhIUXVQWi1MRkpYeVVwdS1leXNwZzhLSkNScTlROUlwRTdjdUhmeDhFVV9V?oc=5",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Quora",
+    "rank": 2,
+    "topic": "Which smartphone should i buy in 2026?",
+    "score": 45.5,
+    "link": "https://www.quora.com/search?q=which%20smartphone%20should%20i%20buy%20in%202026",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Quora",
+    "rank": 3,
+    "topic": "Best laptop for college students 2026?",
+    "score": 45.5,
+    "link": "https://www.quora.com/search?q=best%20laptop%20for%20college%20students%202026",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Quora",
+    "rank": 4,
+    "topic": "What are the best AI tools for creating both articles and videos from a single idea?",
+    "score": 43.5,
+    "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQRFFudHRHdmhlSUtWbEo4c25YYWlfaHFWelp0S1ZjcDV5dXZxMEZfTEhRay15alVQZnhIek4yeThwZzZFR2JKbXg1TmZuLXNva2l5aTJyenUwdk84a19NMXlrRm1CQ0s5NFpIblpNdF9LOVlqeVhoV29aSmNCX0RPWVdYWjNfUjA1dFBTQXhtcDkyZmwyaU5ybFBKMlllUnRzVHVKeTg0SW4?oc=5",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Quora",
+    "rank": 5,
+    "topic": "Best ai tool for image generation?",
+    "score": 38.5,
+    "link": "https://www.quora.com/search?q=best%20ai%20tool%20for%20image%20generation",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Bing Search",
+    "rank": 1,
+    "topic": "iOS 27.1 release date: Here’s when to expect the new iPhone update",
+    "score": 66.0,
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6ab57af4dd1348ac99c1ebb336b257cc&url=https%3a%2f%2f9to5mac.com%2f2026%2f09%2f11%2fios-27-1-release-date-heres-when-to-expect-the-new-iphone-update%2f&c=4752823578764990408&mkt=en-us",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Bing Search",
+    "rank": 2,
+    "topic": "iOS 26.6 Update: Why The Newly Released iPhone Feature Matters",
+    "score": 63.5,
+    "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6ab57af4dd1348ac99c1ebb336b257cc&url=https%3a%2f%2fwww.forbes.com%2fsites%2fdavidphelan%2f2026%2f07%2f29%2fios-266-release-next-iphone-update-is-almost-here-heres-the-target-date%2f&c=13935615075770076975&mkt=en-us",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Bing Search",
+    "rank": 3,
+    "topic": "best laptop 2026 for home use",
+    "score": 45.5,
+    "link": "https://www.bing.com/search?q=best%20laptop%202026%20for%20home%20use",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Bing Search",
+    "rank": 4,
+    "topic": "best laptop 2026",
+    "score": 42.5,
+    "link": "https://www.bing.com/search?q=best%20laptop%202026",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Bing Search",
+    "rank": 5,
+    "topic": "best laptop 2026 australia",
+    "score": 42.5,
+    "link": "https://www.bing.com/search?q=best%20laptop%202026%20australia",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Google News",
+    "rank": 1,
+    "topic": "Apple Mac mini review: The new M6 impresses, but the price hike is rough",
+    "score": 61.0,
+    "link": "https://arstechnica.com/gadgets/2026/09/apple-m6-mac-mini-review-300-price-hike-spoils-a-nice-upgrade/",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Google News",
+    "rank": 2,
+    "topic": "Meta Connect 2026: VR Glasses, AI Specs and Every Announcement",
+    "score": 55.5,
+    "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOUkVQTldZaG9McjNIUVdWUFRUYXRGWVF1UXhUR2I4RmZEcHJGYkZHOEp3SGJNUGlWaHhUdG9LcXFLYUt2UnE5RkxuWnlWS1RSTVM3YThHM0h1MVp0XzBtTU1qZ2otMHBBYVNNRDZnMVVja1RiZURDT1RrQVg3c211VTdncE5OVnR2NzFXTzVZU0tzYzQ?oc=5",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Google News",
+    "rank": 3,
+    "topic": "New York Times Cooking is coming to Meta's AI and display glasses",
+    "score": 47.5,
+    "link": "https://www.engadget.com/2268183/new-york-times-cooking-is-coming-to-metas-ai-and-display-glasses/",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Google News",
+    "rank": 4,
+    "topic": "Google may be giving the Pixel Recorder app a new superpower",
+    "score": 35.5,
+    "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQMnJ4M3E1WXBSUC1Ld3lJU2N1OWU4VnUtNWF3R1dXeVRJb3JGS0ZpN0k3YXZLeTZ5Ym16c25ZTzBHZ1hySE1SVDQ2SmtRUng5NzUyRzd1eTZUb0xrRWlVdjQzNW4xOWpvbzR1VGtTU2RSU1ZYeWZiSEFBY3owMUNFQUhxRjFMZHA4NXgyMnREQmI1X1h6QnVaZm1NUndsY1RzY01B?oc=5",
+    "ai": "scored",
+    "new": true
+   },
+   {
+    "platform": "Google News",
+    "rank": 5,
+    "topic": "Owners mourn spoiled food after firmware update bricks Samsung smart fridges",
+    "score": 32.5,
+    "link": "https://arstechnica.com/gadgets/2026/09/owners-mourn-spoiled-food-after-firmware-update-bricks-samsung-smart-fridges/",
+    "ai": "scored",
+    "new": true
+   }
+  ]
+ },
+ "content_plan": [
+  {
+   "topic": "iOS 27.1 release date: Here’s when to expect the new iPhone update",
+   "category": "Tech",
+   "platform": "Bing Search",
+   "demand": 66.0,
+   "competition": 10,
+   "opportunity": 74.4,
+   "intent": "News / Update",
+   "angle": "News / Update — মানুষ এখন 'ios 27 1 release' খুঁজছে; সরাসরি উত্তর দিয়ে শুরু করো।",
+   "titles": [
+    "iOS 27.1 release date: Here’s when to expect the new iPhone updat",
+    "iOS 27.1 release date: Here’s when to expect the: What You Need to Know",
+    "Ios 27 1 Release Explained (2026 Guide)"
+   ],
+   "meta": "Everything about ios 27 1 release — clear answers, latest updates and practical tips.",
+   "keywords": [
+    "ios 27 1 release",
+    "when does ios 27",
+    "siri ai ios 27",
+    "ios 27 issues",
+    "ios 27 release",
+    "ios 27 1 2"
+   ],
+   "outline": [
+    "Quick answer (TL;DR)",
+    "What is ios 27 1 release?",
+    "Why it's trending right now",
+    "Key details / how it works",
+    "Pros, cons and common mistakes",
+    "What to do next"
+   ],
+   "faq": [
+    "When does ios 27 beta 1 release?",
+    "Is siri ai on ios 27 beta 1 day release?",
+    "Ios 27 issues?",
+    "Ios 27 release?"
+   ],
+   "paa": [
+    "When does ios 27 beta 1 release?",
+    "Is siri ai on ios 27 beta 1 day release?",
+    "Ios 27 issues?",
+    "Ios 27 release?",
+    "Ios 27.1 2 update?",
+    "Ios 1 release date?",
+    "Ios 17 release date?",
+    "Ios 27 release time?"
+   ],
+   "hook": "Everyone's searching for ios 27 1 release right now — here's why.",
+   "beats": [
+    "ios 27 1 release just blew up in the US.",
+    "Here's the part most people miss.",
+    "This is what actually matters for you.",
+    "Three things to remember."
+   ],
+   "cta": "Follow for daily updates.",
+   "caption": "iOS 27.1 release date: Here’s when to expect the new iPhone update",
+   "hashtags": [
+    "#trending",
+    "#shorts",
+    "#viral",
+    "#news",
+    "#fyp",
+    "#ios"
+   ],
+   "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6ab57af4dd1348ac99c1ebb336b257cc&url=https%3a%2f%2f9to5mac.com%2f2026%2f09%2f11%2fios-27-1-release-date-heres-when-to-expect-the-new-iphone-update%2f&c=4752823578764990408&mkt=en-us"
+  },
+  {
+   "topic": "iOS 26.6 Update: Why The Newly Released iPhone Feature Matters",
+   "category": "Tech",
+   "platform": "Bing Search",
+   "demand": 63.5,
+   "competition": 10,
+   "opportunity": 72.8,
+   "intent": "News / Update",
+   "angle": "News / Update — মানুষ এখন 'ios 26 6 update' খুঁজছে; সরাসরি উত্তর দিয়ে শুরু করো।",
+   "titles": [
+    "iOS 26.6 Update: Why The Newly Released iPhone Feature Matters",
+    "iOS 26.6 Update: Why The Newly Released iPhone F: What You Need to Know",
+    "Ios 26 6 Update Explained (2026 Guide)"
+   ],
+   "meta": "Everything about ios 26 6 update — clear answers, latest updates and practical tips.",
+   "keywords": [
+    "ios 26 6 update",
+    "update ios 6",
+    "update ios 26 6",
+    "update ios 26 6",
+    "ios 26 6 1",
+    "ios 26 beta"
+   ],
+   "outline": [
+    "Quick answer (TL;DR)",
+    "What is ios 26 6 update?",
+    "Why it's trending right now",
+    "Key details / how it works",
+    "Pros, cons and common mistakes",
+    "What to do next"
+   ],
+   "faq": [
+    "How to update ios 6?",
+    "How to update ios 26.6?",
+    "How to update ios 26.6 1?",
+    "Ios 26.6 1?"
+   ],
+   "paa": [
+    "How to update ios 6?",
+    "How to update ios 26.6?",
+    "How to update ios 26.6 1?",
+    "Ios 26.6 1?",
+    "Ios 26 beta?",
+    "Ios 26 6 gb?",
+    "Ios 26 update?",
+    "Ios 26 6 beta?"
+   ],
+   "hook": "Everyone's searching for ios 26 6 update right now — here's why.",
+   "beats": [
+    "ios 26 6 update just blew up in the US.",
+    "Here's the part most people miss.",
+    "This is what actually matters for you.",
+    "Three things to remember."
+   ],
+   "cta": "Follow for daily updates.",
+   "caption": "iOS 26.6 Update: Why The Newly Released iPhone Feature Matters",
+   "hashtags": [
+    "#trending",
+    "#shorts",
+    "#viral",
+    "#news",
+    "#fyp",
+    "#ios"
+   ],
+   "link": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6ab57af4dd1348ac99c1ebb336b257cc&url=https%3a%2f%2fwww.forbes.com%2fsites%2fdavidphelan%2f2026%2f07%2f29%2fios-266-release-next-iphone-update-is-almost-here-heres-the-target-date%2f&c=13935615075770076975&mkt=en-us"
+  },
+  {
+   "topic": "Apple Mac mini review: The new M6 impresses, but the price hike is rough",
+   "category": "Tech",
+   "platform": "Google News",
+   "demand": 61.0,
+   "competition": 10,
+   "opportunity": 71.1,
+   "intent": "Commercial / Review",
+   "angle": "Commercial / Review — মানুষ এখন 'apple mac mini review' খুঁজছে; সরাসরি উত্তর দিয়ে শুরু করো।",
+   "titles": [
+    "Apple Mac mini review: The new M6 impresses, but the price hike i",
+    "Apple Mac mini review: The new M6 impresses, but: What You Need to Know",
+    "Apple Mac Mini Review Explained (2026 Guide)"
+   ],
+   "meta": "Everything about apple mac mini review — clear answers, latest updates and practical tips.",
+   "keywords": [
+    "apple mac mini review",
+    "mac mini good",
+    "apple mac mini good",
+    "apple mac mini review",
+    "apple mac mini review",
+    "apple mac mini review"
+   ],
+   "outline": [
+    "Quick answer (TL;DR)",
+    "What is apple mac mini review?",
+    "Why it's trending right now",
+    "Key details / how it works",
+    "Pros, cons and common mistakes",
+    "What to do next"
+   ],
+   "faq": [
+    "What is mac mini good for?",
+    "Is apple mac mini good for gaming?",
+    "Apple mac mini review?",
+    "Apple mac mini review m2?"
+   ],
+   "paa": [
+    "What is mac mini good for?",
+    "Is apple mac mini good for gaming?",
+    "Apple mac mini review?",
+    "Apple mac mini review m2?",
+    "Apple mac mini review 2023?",
+    "Apple mac mini a1347 review?",
+    "Apple mac mini gaming review?",
+    "Apple mac mini m4 chip review?"
+   ],
+   "hook": "Everyone's searching for apple mac mini review right now — here's why.",
+   "beats": [
+    "apple mac mini review just blew up in the US.",
+    "Here's the part most people miss.",
+    "This is what actually matters for you.",
+    "Three things to remember."
+   ],
+   "cta": "Follow for daily updates.",
+   "caption": "Apple Mac mini review: The new M6 impresses, but the price hike is rough",
+   "hashtags": [
+    "#trending",
+    "#shorts",
+    "#viral",
+    "#news",
+    "#fyp",
+    "#apple"
+   ],
+   "link": "https://arstechnica.com/gadgets/2026/09/apple-m6-mac-mini-review-300-price-hike-spoils-a-nice-upgrade/"
+  }
+ ]
+}
