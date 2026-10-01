@@ -1,5 +1,11 @@
 # 🔥 Daily Trend Engine
 
+[![CI](https://github.com/SaidulM/trend-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/SaidulM/trend-engine/actions/workflows/ci.yml)
+[![Daily Trends](https://github.com/SaidulM/trend-engine/actions/workflows/daily-trends.yml/badge.svg)](https://github.com/SaidulM/trend-engine/actions/workflows/daily-trends.yml)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Cost](https://img.shields.io/badge/cost-%240%2Fmonth-brightgreen)
+
+
 **US-এর মোস্ট ট্রেন্ডিং + মোস্ট সার্চেবল টপিক — ক্যাটাগরি ও প্ল্যাটফর্ম অনুযায়ী, রোজ দুপুর ১টায় তোমার Google Sheet-এ।**
 ১০০% ফ্রি · কোনো ক্রেডিট কার্ড নয় · কোনো ট্রায়াল নয় · সব ওপেন/পাবলিক API।
 
