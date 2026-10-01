@@ -158,3 +158,31 @@ repo লাইভ হওয়ার পর আসল পরিবেশে য�
 
 > 💡 **শিক্ষা:** লোকাল টেস্ট যথেষ্ট নয়। CI ও প্রথম লাইভ রান ছাড়া #19 ও #20 কখনো ধরা পড়ত না —
 > আর #20 নীরবে তোমার প্রথম দিনের ডেটা নষ্ট করত।
+
+
+---
+
+# 🔍 অডিট রাউন্ড ৪ — "সব ট্যাবে একই Google Trends টপিক"
+
+ব্যবহারকারীর রিপোর্ট অনুযায়ী তদন্ত করে **মূল কারণ** পাওয়া গেল, আর সাথে আরও ৪টি বাগ।
+
+| # | সমস্যা | প্রমাণ | সমাধান |
+|---|---|---|---|
+| 26 | 🔴 **Google Trends RSS-এ ক্যাটাগরি বলেই কিছু নেই** — `&category=3/8/18` প্যারামিটার Google **সম্পূর্ণ উপেক্ষা** করে | টেস্ট: Business/Health/Tech তিনটিতেই **১০-এর মধ্যে ১০টি হুবহু একই** (`steelers vs browns`, `cancer`) | **Exclusive assignment** — প্রতিটি গ্লোবাল ট্রেন্ড কীওয়ার্ড-ম্যাচ স্কোর দিয়ে **ঠিক একটি** ক্যাটাগরিতে যায়, কোথাও না মিললে বাদ |
+| 27 | 🔴 **`run_seen` প্রতি ক্যাটাগরিতে রিসেট হতো** | `main.py` লুপের ভিতরে `set()` | গ্লোবাল করা হলো — একই টপিক আর দুই ট্যাবে আসবে না |
+| 28 | 🔴 **pytrends সবসময় ক্র্যাশ করত** — `Retry.__init__() got an unexpected keyword argument 'method_whitelist'` | urllib3 v2-তে ওই আর্গুমেন্ট নেই; তাই Google Trends স্কোর **কখনোই যোগ হয়নি** | `retries/backoff_factor` বাদ — এখন সত্যিই ডেটা আসছে |
+| 29 | 🟠 **অটোকমপ্লিট ক্লোন** — "best laptop 2026 **for personal use / for college students / with touch screen**" | লাইভ রান | অটোকমপ্লিট-উৎসে cap **সবসময় ১** (relaxation-এও শিথিল হয় না) |
+| 30 | 🟠 **জাঙ্ক ঢুকছিল** — "NEWS CENTER Maine Morning Report at 6", "technical product launch manager amazon robotics" (চাকরির বিজ্ঞাপন), "news breaking nearby" | লাইভ রান | ৩টি নতুন গেট: `BROADCAST`, `JOBS`, `VAGUE` + পুনরাবৃত্ত-শব্দ ডিটেক্টর |
+| 31 | 🟠 **"Islam Makhachev" (MMA ফাইটার) Islamic ট্যাবে** | লাইভ রান | Islamic-এ `never`: makhachev, ufc, mma, boxing, fighter… |
+| 32 | 🟡 News-এর সিড খুব জেনেরিক ছিল ("breaking news today") | ফলাফলে আবর্জনা | নির্দিষ্ট সিড: supreme court ruling, immigration policy, congress bill vote… |
+
+## ➕ নতুন: স্প্যানিশ (US) সাপোর্ট
+US-এর স্প্যানিশভাষী অডিয়েন্সের জন্য Google News (`hl=es-419&ceid=US:es`) ও Google Autocomplete (`hl=es&gl=us`) যোগ করা হলো। স্প্যানিশ সারিতে `[ES]` ট্যাগ থাকে।
+*(টেস্টে নিশ্চিত: স্প্যানিশ ফিড 302 রিডাইরেক্ট দেয় — redirect ফলো করলে ১০১টি আইটেম আসে।)*
+
+## 🎯 ক্যাটাগরি কমানো — এখন ৩টি
+ব্যবহারকারীর অনুরোধে **Health, Image_Emoji, Business বাদ**। থাকল **Tech, News, Islamic**।
+সময় বাঁচায় `SHORTLIST` ৮ → **১২** করা হলো, অর্থাৎ প্রতিটি স্লটে আরও ভালো বাছাই।
+
+**ফলাফল (লাইভ যাচাই):** ক্রস-ক্যাটাগরি ডুপ্লিকেট **শূন্য**, ৮৪/৯০ স্লট পূর্ণ, রান ~১৫ মিনিট।
+**মোট ৪ দফা অডিটে ৩২টি সমস্যা ধরা ও ফিক্স করা হয়েছে। টেস্ট: ২৭ → ৩৩।**

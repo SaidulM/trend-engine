@@ -20,7 +20,7 @@ from .sources import google_suggest
 
 log = logging.getLogger("verify")
 
-SHORTLIST = int(os.getenv("SHORTLIST", "8"))
+SHORTLIST = int(os.getenv("SHORTLIST", "12"))   # ৩ ক্যাটাগরি হওয়ায় সময় আছে → ভালো বাছাই
 
 STOP = {"the", "a", "an", "of", "for", "and", "to", "in", "on", "is", "are", "with", "how",
         "what", "why", "best", "new", "your", "you", "this", "that", "it", "at", "by", "from",
@@ -35,6 +35,33 @@ JUNK = re.compile(
     r"^(re:|\[deleted\]|\[removed\]|daily thread|weekly thread|megathread|rant|vent|"
     r"discussion thread|what'?s everyone|moronic monday|daily discussion|"
     r"monthly|weekend|free talk|meta:|mod post|psa:|aita)", re.I)
+
+# সম্প্রচার-লিস্টিং ও অর্থহীন কোয়েরি (যেমন "NEWS CENTER Maine Morning Report at 6")
+BROADCAST = re.compile(
+    r"(morning report|news center|newscenter|at \d{1,2}(:\d\d)?\s*(am|pm)?$|"
+    r"\b(live at|watch live|full episode|replay|livestream|rebroadcast)\b|"
+    r"\b\d{1,2}\s*(am|pm)\s+(news|report|update)\b|"
+    r"^(abc|nbc|cbs|fox|wkyc|wfaa|kens|khou)\d*\b)", re.I)
+
+
+JOBS = re.compile(
+    r"\b(hiring|job opening|apply now|salary|resume|recruiter|"
+    r"(senior|junior|lead|staff|principal)?\s*(manager|engineer|developer|analyst|intern)"
+    r"\s+(at|amazon|google|microsoft|meta|apple)\b)", re.I)
+
+# "news breaking nearby", "breaking news today oregon" — অর্থহীন জেনেরিক কোয়েরি
+# "breaking news today oregon", "news breaking nearby" — বিষয়হীন ব্রাউজিং-কোয়েরি:
+# news-শব্দ দিয়ে শুরু, তারপর ৩টির কম অর্থবহ শব্দ (শুধু সময়/জায়গা/ফিলার)
+VAGUE = re.compile(
+    r"^(breaking\s+news|latest\s+news|top\s+news|news\s+breaking|news)"
+    r"(\s+(today|now|live|nearby|near\s+me|usa|us|update[sd]?|headlines|online|free|"
+    r"[a-z]{3,12}))" r"{0,2}\s*$", re.I)
+
+
+def _repeats_word(t):
+    """'breaking news today headlines today usa' ধরনের পুনরাবৃত্তি ধরা"""
+    w = [x for x in norm(t).split() if len(x) > 3]
+    return len(w) != len(set(w))
 
 
 # ============================================================ STAGE A : gates
@@ -69,6 +96,10 @@ def quality_ok(title):
         return False
     if title.count("?") > 2 or title.count("!") > 1:
         return False
+    if BROADCAST.search(title) or JOBS.search(title) or VAGUE.search(title):
+        return False
+    if _repeats_word(title):
+        return False
     return True
 
 
@@ -85,12 +116,21 @@ def dedupe(items, thresh=0.72):
     return kept
 
 
+AUTOCOMPLETE_SRC = re.compile(r"(autocomplete|search demand|question demand)", re.I)
+
+
 def diversify(items, max_per_prefix=2, max_per_source=2, prefix_words=2):
+    """একই ফ্রেজের ভ্যারিয়েশন ঠেকায়।
+    অটোকমপ্লিট-উৎসের আইটেমে cap সবসময় ১ — কারণ ওগুলোই সবচেয়ে বেশি ক্লোন তৈরি করে
+    ('best laptop 2026 for personal use / for college students / with touch screen')।"""
     pre, src, out = {}, {}, []
     for it in items:
-        p = " ".join(norm(it["title"]).split()[:prefix_words])
+        auto = bool(AUTOCOMPLETE_SRC.search(it.get("info") or ""))
+        words = 2 if auto else prefix_words
+        cap = 1 if auto else max_per_prefix
+        p = " ".join(norm(it["title"]).split()[:words])
         s = (it.get("info") or "")[:24]
-        if pre.get(p, 0) >= max_per_prefix or (s and src.get(s, 0) >= max_per_source):
+        if pre.get(p, 0) >= cap or (s and src.get(s, 0) >= max_per_source):
             continue
         pre[p] = pre.get(p, 0) + 1
         src[s] = src.get(s, 0) + 1
@@ -127,6 +167,10 @@ def cheap_score(it, cfg):
         s += 5
     if 6 <= len(title.split()) <= 14:
         s += 3
+    # "... for personal use / for beginners / near me" ধরনের দুর্বল লং-টেইল
+    if re.search(r"\b(for personal use|for beginners|near me|for sale|for cheap|"
+                 r"for college students|free download|list)\b", title, re.I):
+        s -= 8
     return s
 
 
@@ -197,7 +241,9 @@ def trends_scores(titles):
     try:
         from pytrends.request import TrendReq
         if _pytrends is None:
-            _pytrends = TrendReq(hl="en-US", tz=360, retries=2, backoff_factor=0.6,
+            # FIX: retries/backoff_factor দিলে pytrends পুরনো urllib3 API
+            # (method_whitelist) ব্যবহার করে → urllib3 v2-তে TypeError। তাই বাদ।
+            _pytrends = TrendReq(hl="en-US", tz=360,
                                  requests_args={"headers": {"Accept-Language": "en-US"}})
         kw = []
         for t in titles[:5]:

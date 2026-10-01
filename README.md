@@ -16,7 +16,9 @@
 
 ## 📊 আউটপুট
 
-**৯টি ট্যাব:** `DASHBOARD` · `CONTENT_PLAN` · Tech · Health · News · Islamic · Image_Emoji · Business · `ARCHIVE`
+**৬টি ট্যাব:** `DASHBOARD` · `CONTENT_PLAN` · **Tech** · **News** · **Islamic** · `ARCHIVE`
+
+ভাষা: **ইংরেজি + স্প্যানিশ** (দুটোই US অডিয়েন্স)। স্প্যানিশ সারিতে `[ES]` ট্যাগ থাকে।
 
 ### ✍️ CONTENT_PLAN — আসল কাজের পাতা
 রোজ **১৫টি সেরা টপিকের সম্পূর্ণ ব্রিফ**, Opportunity অনুযায়ী সাজানো:

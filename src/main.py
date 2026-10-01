@@ -30,12 +30,13 @@ def run():
         ss = open_sheet()
 
     cats = {k: v for k, v in CATEGORIES.items() if not ONLY or k in ONLY}
+    run_seen = set()          # FIX: আগে প্রতি ক্যাটাগরিতে রিসেট হতো → একই টপিক সব ট্যাবে
     archive, records, snapshot = [], [], {"generated": stamp, "tz": TZ, "categories": {}}
     failures = []
 
     for cat, cfg in cats.items():
         log.info("── %s (%s)", cat, cfg["label"])
-        rows, run_seen, cat_out = [], set(), []
+        rows, cat_out = [], []
         for plat in PLATFORMS:
             try:
                 raw = COLLECTORS[plat](cat, cfg)

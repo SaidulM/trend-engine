@@ -52,9 +52,9 @@ def _safe(fn, x):
 
 
 # ---------------------------------------------------------------- suggest APIs
-def google_suggest(seed):
+def google_suggest(seed, hl="en"):
     d = get_json("https://suggestqueries.google.com/complete/search"
-                 f"?client=chrome&hl=en&gl=us&q={up.quote(seed)}")
+                 f"?client=chrome&hl={hl}&gl=us&q={up.quote(seed)}")
     try:
         return [clean(x) for x in d[1]][:10]
     except Exception:
@@ -90,23 +90,88 @@ def ddg_suggest(seed):
 
 
 # ---------------------------------------------------------------- GOOGLE TRENDS
-def google_trends(cat, cfg):
-    out = []
+_TRENDS_POOL = None          # গ্লোবাল daily trends — রানে একবারই আনা হয়
+_TRENDS_ASSIGN = None        # {category: [items]} — প্রতিটি ট্রেন্ড ঠিক একটি ক্যাটাগরিতে
+
+
+def _daily_trends():
+    """Google Trends daily RSS (US)। এখানে ক্যাটাগরি বলে কিছু নেই —
+    `&category=` প্যারামিটার Google উপেক্ষা করে (টেস্ট করে নিশ্চিত হয়েছি),
+    তাই সবাইকে একই লিস্ট দিলে সব ট্যাবে একই টপিক আসত। নিচে exclusive assignment।"""
+    global _TRENDS_POOL
+    if _TRENDS_POOL is not None:
+        return _TRENDS_POOL
+    pool = []
     for u in ("https://trends.google.com/trending/rss?geo=US",
               "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US"):
-        hits = rss(u, 50, "Google daily trend")
+        hits = rss(u, 60, "Google daily trend")
         if hits:
             for h in hits:
-                h["link"] = h["link"] or "https://trends.google.com/trending?geo=US"
-                h["hot"] = True          # আসল daily trend = বোনাস স্কোর
-            out += hits
+                h["link"] = h["link"] or ("https://www.google.com/search?q=" + up.quote(h["title"]))
+                h["hot"] = True
+            pool = hits
             break
+    _TRENDS_POOL = pool
+    log.info("Google daily trends: %d টার্ম", len(pool))
+    return pool
 
-    def one(seed):
+
+def _match_score(title, cfg):
+    t = " " + re.sub(r"[^a-z0-9' ]+", " ", title.lower()) + " "
+    t = re.sub(r"\s+", " ", t)
+    for bad in cfg.get("never", []):
+        if f" {bad} " in t:
+            return -1
+    sc = 0
+    for kw in cfg["must_any"]:
+        if f" {kw} " in t or f" {kw}s " in t:
+            sc += 2 + len(kw.split())          # বহু-শব্দের ম্যাচ বেশি নির্ভরযোগ্য
+    return sc
+
+
+def _assign_trends():
+    """প্রতিটি গ্লোবাল ট্রেন্ড শুধু **সবচেয়ে মানানসই একটি** ক্যাটাগরিতে যাবে।
+    কোনোটার সাথে না মিললে বাদ — এতেই 'সব ট্যাবে একই টপিক' সমস্যা মেটে।"""
+    global _TRENDS_ASSIGN
+    if _TRENDS_ASSIGN is not None:
+        return _TRENDS_ASSIGN
+    from .config import CATEGORIES
+    out = {c: [] for c in CATEGORIES}
+    for it in _daily_trends():
+        best, best_sc = None, 0
+        for cat, cfg in CATEGORIES.items():
+            sc = _match_score(it["title"], cfg)
+            if sc > best_sc:
+                best, best_sc = cat, sc
+        if best:
+            x = dict(it)
+            x["info"] = "Google daily trend (US)"
+            out[best].append(x)
+    _TRENDS_ASSIGN = out
+    log.info("trend assignment: %s",
+             {k: len(v) for k, v in out.items() if v} or "কোনো গ্লোবাল ট্রেন্ড ম্যাচ করেনি")
+    return out
+
+
+def google_trends(cat, cfg):
+    """ক্যাটাগরি-নির্দিষ্ট সার্চ ডিমান্ড: exclusive daily trends + EN/ES autocomplete।"""
+    out = list(_assign_trends().get(cat, []))
+
+    def en(seed):
         return [{"title": s, "info": "Google autocomplete",
                  "link": "https://www.google.com/search?q=" + up.quote(s)}
                 for s in google_suggest(seed)]
-    out += pmap(one, cfg["seeds"])
+
+    def es(seed):
+        return [{"title": s, "info": "[ES] Google autocomplete",
+                 "link": "https://www.google.com/search?q=" + up.quote(s) + "&hl=es"}
+                for s in google_suggest(seed, hl="es")]
+
+    out += pmap(en, cfg["seeds"])
+    out += pmap(es, cfg.get("es_queries", []))
+    # "rising" ধরনের সিগন্যাল — ট্রেন্ড-মডিফায়ার দিয়ে অটোকমপ্লিট
+    mods = [f"{cfg['seeds'][0]} today", f"{cfg['seeds'][0]} 2026", f"new {cfg['seeds'][0]}"]
+    out += pmap(en, mods)
     return out
 
 
@@ -226,6 +291,11 @@ def google_news(cat, cfg):
         return rss("https://news.google.com/rss/search?q=" + up.quote(x)
                    + "+when:2d&hl=en-US&gl=US&ceid=US:en", 12, "Google News")
     out += pmap(q, cfg["news_queries"])
+
+    def qes(x):
+        return rss("https://news.google.com/rss/search?q=" + up.quote(x)
+                   + "+when:3d&hl=es-419&gl=US&ceid=US:es", 10, "[ES] Google News")
+    out += pmap(qes, cfg.get("es_queries", []))
 
     def feed(u):
         return rss(u, 12, up.urlparse(u).netloc.replace("www.", ""))

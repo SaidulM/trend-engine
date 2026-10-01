@@ -7,12 +7,11 @@ from src.verifier import relevant, quality_ok, dedupe, diversify, norm, cheap_sc
 @pytest.mark.parametrize("title,cat,expect", [
     ("Apple unveils M5 MacBook Pro with new AI chip", "Tech", True),
     ("Best chili recipe for a cold winter night", "Tech", False),
-    ("Ozempic linked to lower heart risk in new study", "Health", True),
-    ("Nasdaq slips as Fed signals a rate pause", "Health", False),
     ("How to pray Salah step by step for beginners", "Islamic", True),
-    ("Nvidia earnings beat Wall Street estimates", "Business", True),
-    ("New emoji coming to iPhone in the 2026 update", "Image_Emoji", True),
+    ("Ramadan 2026 start date announced in Saudi Arabia", "Islamic", True),
     ("Senate passes new immigration bill after debate", "News", True),
+    ("Hurricane makes landfall in Florida, thousands evacuated", "News", True),
+    ("Best chili recipe for a cold winter night", "News", False),
 ])
 def test_relevance_gate(title, cat, expect):
     assert relevant(title, CATEGORIES[cat]) is expect
@@ -75,6 +74,16 @@ def test_grid_size():
     assert len(PLATFORMS) == 6 and TOPICS_PER_PLATFORM == 5
 
 
+def test_only_three_categories():
+    """ব্যবহারকারীর চাহিদা: শুধু Tech, News, Islamic।"""
+    assert set(CATEGORIES) == {"Tech", "News", "Islamic"}
+
+
+def test_every_category_has_spanish():
+    for c, cfg in CATEGORIES.items():
+        assert cfg.get("es_queries"), f"{c}-এ স্প্যানিশ কোয়েরি নেই"
+
+
 def test_pick_diverse_no_clone_leak():
     """রিগ্রেশন: fallback যেন ক্লোন ফিরিয়ে না আনে।"""
     from src.verifier import pick_diverse
@@ -120,3 +129,41 @@ def test_dashboard_uses_dicts_not_indexes():
     body = src.split('"""')[-1]          # docstring বাদ দিয়ে শুধু আসল কোড
     assert "r[10]" not in body and "r[4]" not in body
     assert 'r.get("score")' in body and 'r["topic"]' in body
+
+
+def test_broadcast_junk_rejected():
+    from src.verifier import quality_ok
+    assert quality_ok("NEWS CENTER Maine Morning Report at 6") is False
+    assert quality_ok("Watch live: Senate hearing on AI regulation") is False
+    assert quality_ok("Senate passes bipartisan AI safety bill") is True
+
+
+def test_repeated_word_query_rejected():
+    from src.verifier import quality_ok
+    assert quality_ok("breaking news today headlines today usa") is False
+    assert quality_ok("breaking news on Senate immigration vote") is True
+
+
+def test_autocomplete_clones_capped_hard():
+    """রিগ্রেশন: 'best laptop 2026 for X' তিনটে একসাথে আসা বন্ধ।"""
+    from src.verifier import diversify
+    items = [{"title": f"best laptop 2026 {x}", "info": "Google autocomplete"}
+             for x in ("for personal use", "for college students", "with touch screen")]
+    assert len(diversify(items)) == 1
+
+
+def test_islamic_rejects_mma_fighter():
+    """রিগ্রেশন: 'Islam Makhachev' (MMA ফাইটার) যেন Islamic ক্যাটাগরিতে না আসে।"""
+    from src.verifier import relevant
+    cfg = CATEGORIES["Islamic"]
+    assert relevant("islam makhachev record", cfg) is False
+    assert relevant("islam vs garry ufc title fight", cfg) is False
+    assert relevant("Ramadan 2026 start date announced", cfg) is True
+
+
+def test_job_ads_and_vague_queries_rejected():
+    from src.verifier import quality_ok
+    assert quality_ok("technical product launch manager amazon robotics") is False
+    assert quality_ok("news breaking nearby") is False
+    assert quality_ok("breaking news today oregon") is False
+    assert quality_ok("Senate reaches deal on energy permitting bill") is True
