@@ -39,6 +39,34 @@ jobs:
           cache: pip
           cache-dependency-path: requirements.txt
 
+      - name: Preflight — secrets যাচাই
+        env:
+          SA: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          SID: ${{ secrets.SHEET_ID }}
+        run: |
+          miss=0
+          [ -z "$SA" ]  && { echo "::error::GOOGLE_SERVICE_ACCOUNT_JSON secret সেট করা নেই"; miss=1; }
+          [ -z "$SID" ] && { echo "::error::SHEET_ID secret সেট করা নেই"; miss=1; }
+          if [ "$miss" = "1" ]; then
+            {
+              echo "## ⚙️ সেটআপ এখনো সম্পূর্ণ হয়নি"
+              echo ""
+              echo "Settings → Secrets and variables → Actions → **New repository secret**"
+              echo ""
+              echo "| Secret | মান |"
+              echo "|---|---|"
+              echo "| \`GOOGLE_SERVICE_ACCOUNT_JSON\` | service-account JSON ফাইলের পুরো কনটেন্ট |"
+              echo "| \`SHEET_ID\` | Google Sheet-এর URL থেকে ID |"
+              echo "| \`GEMINI_API_KEY\` | aistudio.google.com/apikey (ফ্রি) |"
+              echo ""
+              echo "⚠️ এরপর service account-এর \`client_email\`-কে Google Sheet-এ **Editor** হিসেবে Share করতে ভুলো না।"
+              echo ""
+              echo "বিস্তারিত: [SETUP.md](../blob/main/SETUP.md)"
+            } >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+          echo "✓ প্রয়োজনীয় secrets পাওয়া গেছে"
+
       - run: pip install -r requirements.txt
 
       - name: Restore HTTP cache
@@ -81,18 +109,38 @@ jobs:
           path: data/
           retention-days: 30
 
-      - name: Open issue on failure
+      - name: Report failure (একটাই issue, কমেন্ট যোগ হয়)
         if: failure()
         uses: actions/github-script@v7
         with:
           script: |
-            const t = `Trend run failed — ${new Date().toISOString().slice(0,10)}`;
-            const existing = await github.rest.issues.listForRepo({
-              owner: context.repo.owner, repo: context.repo.repo,
-              state: 'open', labels: 'automation-failure' });
-            if (!existing.data.find(i => i.title === t)) {
-              await github.rest.issues.create({
-                owner: context.repo.owner, repo: context.repo.repo, title: t,
+            const TITLE = '⚠️ Daily trend run is failing';
+            const url = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const { owner, repo } = context.repo;
+            const open = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', labels: 'automation-failure', per_page: 50 });
+            const hit = open.data.find(i => i.title === TITLE);
+            const body = `Run failed: ${url}\n\n_${new Date().toISOString()}_`;
+            if (hit) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: hit.number, body });
+            } else {
+              await github.rest.issues.create({ owner, repo, title: TITLE,
                 labels: ['automation-failure'],
-                body: `Run: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}` });
+                body: `ডেইলি রান ব্যর্থ হচ্ছে।\n\n${body}\n\n` +
+                      `সবচেয়ে সাধারণ কারণ: secrets সেট করা নেই, অথবা service account-এর ` +
+                      `email Google Sheet-এ Editor হিসেবে Share করা হয়নি। দেখো SETUP.md।` });
+            }
+
+      - name: সফল হলে পুরনো failure issue বন্ধ করো
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const open = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', labels: 'automation-failure', per_page: 50 });
+            for (const i of open.data) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: i.number,
+                body: '✅ পরবর্তী রান সফল হয়েছে — অটো ক্লোজ করা হলো।' });
+              await github.rest.issues.update({ owner, repo, issue_number: i.number, state: 'closed' });
             }
